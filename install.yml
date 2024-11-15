@@ -12,26 +12,11 @@
         state: present
       when: ansible_os_family == "Debian"
 
-    - name: Install required packages for RedHat
-      yum:
-        name: 
-          - yum-utils
-          - device-mapper-persistent-data
-          - lvm2
-        state: present
-      when: ansible_os_family == "RedHat"
-
     - name: Install Docker from default repositories (Debian)
       apt:
         name: docker.io
         state: present
       when: ansible_os_family == "Debian"
-
-    - name: Install Docker from default repositories (RedHat)
-      yum:
-        name: docker
-        state: present
-      when: ansible_os_family == "RedHat"
 
     - name: Start and enable Docker
       service:
@@ -45,16 +30,10 @@
         state: present
       when: ansible_os_family == "Debian"
 
-    - name: Install Python pip for RedHat
-      yum:
-        name: python3-pip
-        state: present
-      when: ansible_os_family == "RedHat"
-
     - name: Install Docker Python module
       pip:
         name: docker
-        executable: pip3  # Use pip3 for Python 3
+        executable: pip3 
         state: present
 
     - name: Create Dockerfile directory
@@ -64,12 +43,12 @@
 
     - name: Copy Dockerfile to the control node
       copy:
-        src: Dockerfile
+        src: dockerfile
         dest: ~/docker_project/Dockerfile
 
     - name: Copy HTML files to the control node
       copy:
-        src: html/
+        src: index.html
         dest: ~/docker_project/html/
 
     - name: Build Docker image

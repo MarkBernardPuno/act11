@@ -51,6 +51,12 @@
         src: index.html
         dest: ~/docker_project/html/
 
+    - name: Build Docker image
+      docker_image:
+        path: ~/docker_project
+        name: my-nginx-image
+        state: present
+
     - name: Run Docker container
       docker_container:
         name: my-nginx-container

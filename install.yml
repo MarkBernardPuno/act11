@@ -51,10 +51,3 @@
         src: index.html
         dest: ~/docker_project/html/
 
-    - name: Run Docker container
-      docker_container:
-        name: my-nginx-container
-        image: my-nginx-image
-        state: started
-        ports:
-          - "80:80"
